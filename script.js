@@ -1,6 +1,7 @@
 let synth;
-let soundfontURL = "https://hlr216.github.io/SynPhonic-website/Sax.sf2"; 
+let soundfontURL = "https://hlr216.github.io/SynPhonic-website/Sax.sf2"; // Update the filename if necessary
 
+// Initialize FluidSynth
 async function initSynth() {
     try {
         synth = new WebAudioFontPlayer(); // Initialize WebAudioFont
@@ -12,6 +13,7 @@ async function initSynth() {
     }
 }
 
+// Function to play a note when a button is clicked
 function playNote(note) {
     if (!synth) {
         console.error("Synth not initialized yet!");
@@ -24,6 +26,7 @@ function playNote(note) {
     console.log(`Playing: ${note} (MIDI: ${midiNote})`);
 }
 
+// Map note names to MIDI numbers
 function noteToMIDI(note) {
     const noteMapping = {
         "C4": 60, "C#4": 61, "D4": 62, "D#4": 63,
@@ -33,8 +36,10 @@ function noteToMIDI(note) {
     return noteMapping[note] || 60;
 }
 
+// Attach event listeners once the page loads
 document.addEventListener("DOMContentLoaded", () => {
-    initSynth();
+    initSynth(); // Initialize the synthesizer
+
     document.querySelectorAll(".note-btn").forEach(button => {
         button.addEventListener("click", () => {
             playNote(button.dataset.note);

@@ -1,13 +1,11 @@
 let synth;
-let soundfontURL = "https://hlr216.github.io/SynPhonic-website/Sax.sf2"; // Update the filename if necessary
+let soundfontURL = "https://hlr216.github.io/SynPhonic-website/Sax.sf2"; // Update filename if necessary
 
 // Initialize FluidSynth
 async function initSynth() {
     try {
-        synth = new WebAudioFontPlayer(); // Initialize WebAudioFont
-        let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        synth.loader.startLoad(audioContext, soundfontURL, synth.loader.findInstrument(0));
-        synth.loader.waitLoad(() => console.log("FluidSynth initialized successfully!"));
+        synth = await FluidSynth.load(soundfontURL); // Load the SoundFont
+        console.log("FluidSynth initialized successfully!");
     } catch (error) {
         console.error("Failed to initialize FluidSynth:", error);
     }
@@ -21,8 +19,7 @@ function playNote(note) {
     }
 
     let midiNote = noteToMIDI(note);
-    let audioContext = new (window.AudioContext || window.webkitAudioContext)();
-    synth.queueWaveTable(audioContext, audioContext.destination, synth.loader.instrument[0], 0, midiNote, 1.0);
+    synth.noteOn(0, midiNote, 100); // Channel 0, MIDI note, velocity 100
     console.log(`Playing: ${note} (MIDI: ${midiNote})`);
 }
 

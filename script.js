@@ -1,5 +1,5 @@
 let synth;
-let soundfontURL = "https://yourusername.github.io/SynPhonic-website/your-soundfont.sf2"; // Update with correct path
+let soundfontURL = "https://hlr216.github.io/SynPhonic-website/Sax.sf2"; // Update with correct path
 
 // Load FluidSynth
 async function initSynth() {
@@ -23,7 +23,7 @@ function noteToMIDI(note) {
     const noteMapping = {
         "C4": 60, "C#4": 61, "D4": 62, "D#4": 63,
         "E4": 64, "F4": 65, "F#4": 66, "G4": 67,
-        "G#4": 68, "A4": 69, "A#4": 70, "B4": 71
+        "G#4": 68, "A4": 69, "A#4": 70, "B4": 71, "A": 69
     };
     return noteMapping[note] || 60; // Default to C4 if note not found
 }
